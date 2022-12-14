@@ -1,4 +1,4 @@
-OpenAI Telegram Bot
+OpenAI API Telegram Bot
 ==================
 
 [![Generic badge](https://img.shields.io/badge/node-16.14.0-blue.svg)](https://nodejs.org) [![Generic badge](https://img.shields.io/badge/pnpm-7.15.0-green.svg)](https://pnpm.io/) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/zzz1ck/openai-api-telegram-bot/blob/main/LICENSE) [![Donate](https://img.shields.io/badge/Donate-Crypto-green.svg)](https://web3.bio/zz1ck.near)
@@ -30,4 +30,5 @@ Once you have added the variables, save the file, install dependencies with `pnp
 ## Usage
 
 To begin using the bot, execute command - `pnpm run watch` or if using Docker - `docker-compose up`.
+
 Have fun! <3

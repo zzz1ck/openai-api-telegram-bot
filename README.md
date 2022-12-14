@@ -1,5 +1,5 @@
-# ChatGPT TypeScript Telegram Wrapper
+# OpenAI Telegram Wrapper for experiments
 
-Telegram TypeScript wrapper for ChatGPT with usage of OpenAI API auth.
+TypeScript Telegram wrapper for playing with OpenAI models. Educational purposes.
 
 

@@ -18,9 +18,9 @@
     "pretty": false,
     "sourceMap": true,
     "target": "es5",
-    "outDir": "./dist/",
-    "rootDir": "./src"
+    "outDir": "dist",
+    "rootDir": "src"
   },
-  "exclude": [],
-  "include": ["./src/*.ts"]
+  "include": ["src/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

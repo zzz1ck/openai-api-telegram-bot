@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  openai-api-telegram-bot:
+    build:
+      dockerfile: Dockerfile
+    container_name: openai-api-telegram-bot
+    restart: on-failure
+    env_file:
+      - .env.local
+    # environment:
+    #   - OPENAI_API_KEY=
+    #   - OPENAI_ORGANIZATION_ID=
+    #   - TELEGRAM_BOT_TOKEN=
+    #   - TELEGRAM_USER_IDS=

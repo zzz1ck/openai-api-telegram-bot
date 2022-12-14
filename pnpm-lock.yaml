@@ -7,6 +7,7 @@ specifiers:
   '@rollup/plugin-node-resolve': ^15.0.1
   '@types/axios': ^0.14.0
   '@types/caseless': ^0.12.2
+  '@types/dotenv': ^8.2.0
   '@types/form-data': ^2.5.0
   '@types/node': ^18.8.3
   '@types/node-telegram-bot-api': ^0.57.6
@@ -43,6 +44,7 @@ devDependencies:
   '@rollup/plugin-node-resolve': 15.0.1
   '@types/axios': 0.14.0
   '@types/caseless': 0.12.2
+  '@types/dotenv': 8.2.0
   '@types/form-data': 2.5.0
   '@types/node': 18.11.15
   '@types/node-telegram-bot-api': 0.57.6
@@ -249,6 +251,13 @@ packages:
 
   /@types/caseless/0.12.2:
     resolution: {integrity: sha512-6ckxMjBBD8URvjB6J3NcnuAn5Pkl7t3TizAg+xdlzzQGSPSmBcXf8KoIH0ua/i+tio+ZRUHEXp0HEmvaR4kt0w==}
+    dev: true
+
+  /@types/dotenv/8.2.0:
+    resolution: {integrity: sha512-ylSC9GhfRH7m1EUXBXofhgx4lUWmFeQDINW5oLuS+gxWdfUeW4zJdeVTYVkexEW+e2VUvlZR2kGnGGipAWR7kw==}
+    deprecated: This is a stub types definition. dotenv provides its own type definitions, so you do not need this installed.
+    dependencies:
+      dotenv: 16.0.3
     dev: true
 
   /@types/estree/1.0.0:
@@ -797,7 +806,6 @@ packages:
   /dotenv/16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
     engines: {node: '>=12'}
-    dev: false
 
   /ecc-jsbn/0.1.2:
     resolution: {integrity: sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw==}

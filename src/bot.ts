@@ -4,29 +4,37 @@ import { OpenAI } from './api';
 export class Bot {
   private bot: TelegramBot;
 
-  constructor(token: string) {
+  private api: OpenAI;
+
+  private userIds: string;
+
+  constructor(token: string, userIds: string) {
+    this.userIds = userIds;
     this.bot = new TelegramBot(token, { polling: true });
-  }
-
-  public start() {
-    console.info('[🤖] Init OpenAI api...');
-
-    const api = new OpenAI(
+    this.api = new OpenAI(
       process.env.OPENAI_ORGANIZATION_ID,
       process.env.OPENAI_API_KEY,
     );
+  }
 
+  private isAllowed(userId: number) {
+    return (
+      !this.userIds || (this.userIds && this.userIds.match(String(userId)))
+    );
+  }
+
+  public start() {
     console.info('[🤖] Awaiting for messages...');
 
     this.bot.on('message', async (msg: TelegramBot.Message) => {
-      const chatId = msg.chat.id;
+      const {
+        chat: { id: chatId },
+        from: { id: userId },
+      } = msg;
 
-      if (
-        process.env.TELEGRAM_USER_IDS
-        && process.env.TELEGRAM_USER_IDS.match(String(msg.from.id))
-      ) {
+      if (this.isAllowed(userId)) {
         this.bot.sendChatAction(chatId, 'typing');
-        const reply = await api.generateText(msg.text);
+        const reply = await this.api.generateText(msg.text);
         this.bot.sendMessage(chatId, reply);
       } else {
         this.bot.sendMessage(

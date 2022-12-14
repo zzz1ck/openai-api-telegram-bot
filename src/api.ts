@@ -24,14 +24,19 @@ export class OpenAI {
 
   public async generateText(
     prompt: string,
-    model = 'text-davinci-002',
+    model = 'text-davinci-003',
   ): Promise<string> {
     try {
       const completion = await this.api.createCompletion({
         model,
         prompt,
-        temperature: 0.7,
-        max_tokens: 500,
+        temperature: 0,
+        max_tokens: 1000,
+        logprobs: null,
+        stream: false,
+        stop: '',
+        top_p: 1,
+        n: 1,
       });
       return completion.data.choices.map((choice) => choice.text).join(' ');
     } catch (error) {

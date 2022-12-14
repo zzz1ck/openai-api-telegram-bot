@@ -6,7 +6,7 @@ services:
     container_name: openai-api-telegram-bot
     restart: on-failure
     env_file:
-      - .env.local
+      - .env
     # environment:
     #   - OPENAI_API_KEY=
     #   - OPENAI_ORGANIZATION_ID=

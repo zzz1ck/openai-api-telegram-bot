@@ -35,8 +35,6 @@
   "devDependencies": {
     "@babel/parser": "^7.19.6",
     "@babel/types": "^7.19.4",
-    "@rollup/plugin-commonjs": "^23.0.3",
-    "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/axios": "^0.14.0",
     "@types/caseless": "^0.12.2",
     "@types/dotenv": "^8.2.0",

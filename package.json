@@ -25,7 +25,7 @@
     "npm": ">=9.2.0"
   },
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "start": "nodemon dist/index.js",
     "build": "tsc --build ./tsconfig.json",
     "clean": "echo 'Cleaning all build files...'",
     "lint": "eslint . --ext ts --fix",

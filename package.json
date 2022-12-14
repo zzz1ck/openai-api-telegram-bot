@@ -1,7 +1,7 @@
 {
   "name": "openai-api-telegram-bot",
   "version": "0.0.1",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "author": "zz1ck <zz1ck@pm.me>",
   "license": "MIT",
   "repository": {

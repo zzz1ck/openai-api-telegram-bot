@@ -1,1 +1,1 @@
-worker: nodemon dist/index.js
+web: nodemon src/index.ts

@@ -1,7 +1,7 @@
 {
   "name": "openai-api-telegram-bot",
   "version": "0.0.1",
-  "main": "dist/index.js",
+  "main": "src/index.ts",
   "author": "zz1ck <zz1ck@pm.me>",
   "license": "MIT",
   "repository": {
@@ -22,15 +22,14 @@
   },
   "engines": {
     "node": ">=16.14.0",
-    "pnpm": ">=7"
+    "npm": ">=9.2.0"
   },
   "scripts": {
-    "watch": "nodemon src/index.ts",
+    "start": "nodemon src/index.ts",
     "build": "tsc --build ./tsconfig.json",
     "clean": "echo 'Cleaning all build files...'",
     "lint": "eslint . --ext ts --fix",
-    "prepare": "husky install",
-    "preinstall": "npx only-allow pnpm"
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/parser": "^7.19.6",
@@ -63,6 +62,5 @@
     "dotenv": "^16.0.3",
     "node-telegram-bot-api": "^0.60.0",
     "openai": "^3.1.0"
-  },
-  "packageManager": "pnpm@7.15.0"
+  }
 }

@@ -23,25 +23,39 @@ export class Bot {
     );
   }
 
+  private async handleMessage(msg: TelegramBot.Message) {
+    const {
+      chat: { id: chatId },
+      from: { id: userId },
+    } = msg;
+
+    if (this.isAllowed(userId)) {
+      this.bot.sendChatAction(chatId, 'typing');
+      const reply = await this.api.generateText(msg.text);
+      this.bot.sendMessage(chatId, reply);
+    } else {
+      this.bot.sendMessage(
+        chatId,
+        'Sorry, you are not allowed to use this bot. 🙈🙉🙊',
+      );
+    }
+
+    // const lol = await this.api.listModels();
+
+    // console.log(lol.data.map((model) => model.id));
+  }
+
   public start() {
     console.info('[🤖] Awaiting for messages...');
+    // this.bot.on('message', (msg: TelegramBot.Message) => this.handleMessage(msg));
 
-    this.bot.on('message', async (msg: TelegramBot.Message) => {
-      const {
-        chat: { id: chatId },
-        from: { id: userId },
-      } = msg;
+    this.bot.on('text', (msg: TelegramBot.Message) => this.handleMessage(msg));
 
-      if (this.isAllowed(userId)) {
-        this.bot.sendChatAction(chatId, 'typing');
-        const reply = await this.api.generateText(msg.text);
-        this.bot.sendMessage(chatId, reply);
-      } else {
-        this.bot.sendMessage(
-          chatId,
-          'Sorry, you are not allowed to use this bot. 🙈🙉🙊',
-        );
-      }
-    });
+    // this.bot.on('voice', (msg: TelegramBot.Message) => console.log('[voice]', msg));
+
+    // this.bot.on('text', (msg: TelegramBot.Message) => console.log('[photo]', msg));
+
+    // process images/stickers with dall-e;
+    // process audio with transcription ai;
   }
 }

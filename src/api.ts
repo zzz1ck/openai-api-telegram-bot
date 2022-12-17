@@ -1,5 +1,5 @@
 import { Configuration, OpenAIApi } from 'openai';
-import type { ListEnginesResponse } from 'openai';
+import type { ListEnginesResponse, ImagesResponse } from 'openai';
 
 export type OrganizationType = string;
 
@@ -22,6 +22,27 @@ export class OpenAI {
     return response.data;
   }
 
+  public async generateImageVariation(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    fileStream: any,
+    amount = 1,
+    size = '1024x1024',
+  ): Promise<ImagesResponse | string> {
+    try {
+      const response = await this.api.createImageVariation(
+        fileStream,
+        amount,
+        size,
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        return `🤬 ${error.response.data.error.message}`;
+      }
+      return `🤬 ${error.message}`;
+    }
+  }
+
   public async generateText(
     prompt: string,
     model = 'text-davinci-003',
@@ -41,9 +62,9 @@ export class OpenAI {
       return completion.data.choices.map((choice) => choice.text).join(' ');
     } catch (error) {
       if (error.response) {
-        return `Error: ${error.response.status} | ${error.response.data?.error?.message}`;
+        return `🤬 ${error.response.data.error.message}`;
       }
-      return `Error: ${error.message}`;
+      return `🤬 ${error.message}`;
     }
   }
 }

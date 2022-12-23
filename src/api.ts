@@ -59,6 +59,11 @@ export class OpenAI {
         top_p: 1,
         n: 1,
       });
+
+      if (completion.data?.choices.length === 1 && !completion.data?.choices[0].text) {
+        return 'There\'s nothing to add here. 🤓';
+      }
+
       return completion.data.choices.map((choice) => choice.text).join(' ');
     } catch (error) {
       if (error.response) {

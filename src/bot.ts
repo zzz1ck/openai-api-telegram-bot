@@ -30,24 +30,20 @@ export class Bot {
 
     if (text.match(/^\/start/g)) {
       this.bot.sendMessage(cid, 'Assistant has successfully started! 🥳');
-    } else if (this.isAllowed(uid)) {
-      this.bot.sendChatAction(cid, 'typing');
-    } else {
-      this.bot.sendMessage(
-        cid,
-        'Sorry, you are not allowed to use this bot. 🙈🙉🙊',
-      );
+    } else if (!this.isAllowed(uid)) {
+      this.bot.sendMessage(cid, 'Sorry, you are not allowed to use this bot. 🙈🙉🙊');
     }
   }
 
   private async handleTextMessage(msg: TelegramBot.Message) {
     const {
-      text,
+      text = '',
       chat: { id: cid },
       from: { id: uid },
     } = msg;
 
     if (this.isAllowed(uid)) {
+      this.bot.sendChatAction(cid, 'typing');
       const reply = await this.api.generateText(text);
       this.bot.sendMessage(cid, reply);
     }
@@ -64,13 +60,17 @@ export class Bot {
       const file = await this.bot.getFile(fid);
 
       if (file.file_path.endsWith('.png')) {
+        this.bot.sendMessage(cid, 'Processing your image, please wait...');
+
         const fileStream = await this.bot.getFileStream(fid);
-        const reply = await this.api.generateImageVariation(fileStream);
+        const reply = await this.api.generateImageVariation(fileStream, 5);
 
         if (typeof reply === 'string') {
+          this.bot.sendChatAction(cid, 'typing');
           this.bot.sendMessage(cid, reply);
         } else {
-          this.bot.sendPhoto(cid, reply.data[0].url);
+          this.bot.sendChatAction(cid, 'upload_photo');
+          this.bot.sendMediaGroup(cid, reply.data.map((image) => ({ type: 'photo', media: image.url })));
         }
       } else {
         this.bot.sendMessage(cid, '⚠️ Unsupported file type, use .png instead!');
@@ -79,7 +79,7 @@ export class Bot {
   }
 
   public start() {
-    console.info('[🤖] Awaiting for messages...');
+    console.info('🤖 Awaiting for messages...');
     this.bot.on('message', (msg: TelegramBot.Message) => this.handleMessage(msg));
     this.bot.on('text', (msg: TelegramBot.Message) => this.handleTextMessage(msg));
     this.bot.on('document', (msg: TelegramBot.Message) => this.handleDocumentMessage(msg));

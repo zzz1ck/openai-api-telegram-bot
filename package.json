@@ -25,7 +25,7 @@
     "pnpm": ">=7"
   },
   "scripts": {
-    "start": "pm2 start dis/index.js --watch",
+    "start": "pm2 start dist/index.js --watch",
     "watch": "nodemon src/index.ts",
     "build": "tsc --build ./tsconfig.json",
     "clean": "echo 'Cleaning all build files...'",
